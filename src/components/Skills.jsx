@@ -3,11 +3,9 @@ import React from "react";
 const Skills = ({ data }) => {
   const skillCategories = [
     { title: "Languages & Frameworks", skills: data.languages },
-    { title: "IDEs", skills: data.ides },
-    { title: "API & Response Management", skills: data.api },
     { title: "Databases", skills: data.databases },
     { title: "Version Control", skills: data.vcs },
-    { title: "Project Management", skills: data.projectManagement },
+    { title: "Tools & Platforms", skills: data.ToolsAndPlatforms },
     { title: "Third Party Integrations", skills: data.thirdParties },
   ];
 

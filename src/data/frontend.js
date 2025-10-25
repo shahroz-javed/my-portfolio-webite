@@ -1,7 +1,7 @@
 export const portfolioData = {
   personalInfo: {
     name: "Shahroz Javed",
-    title: "PHP-Laravel Developer",
+    title: "Frontend Developer",
     address: "Dipty Naseem Town More Eminabad, Gujranwala, Pakistan",
     phone: "+92 3056700508",
     email: "shahrozmaher198r@gmail.com",
@@ -21,23 +21,11 @@ export const portfolioData = {
       "Bootstrap",
       "PHP [Core, Laravel]",
     ],
-    databases: [
-      "MySQL",
-      "SQLite",
-      "Firebase",
-      "MongoDB",
-      "Redis",
-      "PostgreSQL",
-    ],
+    ides: ["Visual Studio Code", "Sublime Text"],
+    api: ["XML", "JSON"],
+    databases: ["MySQL"],
     vcs: ["GIT", "BitBucket", "GitHub", "GitLab", "SourceTree"],
-    ToolsAndPlatforms: [
-      "Docker",
-      "CI/CD",
-      "JIRA",
-      "Trello",
-      "Clickup",
-      "Slack",
-    ],
+    projectManagement: ["JIRA", "Trello", "Clickup", "Slack"],
     thirdParties: ["Twilio", "Stripe", "Paypal", "ChatGPT", "Pusher"],
   },
 
@@ -103,18 +91,6 @@ export const portfolioData = {
       description:
         "Human Resource Information System: Employee management, attendance, assets, reporting, self-service panel.",
       category: "Enterprise Software",
-    },
-    {
-      name: "Ater",
-      description:
-        "A Event Management Platform: Event listings, ticketing, user profiles, and admin dashboard.",
-      category: "Web Application",
-    },
-    {
-      name: "Iotti-Management",
-      description:
-        "A Inventory Management System: Stock tracking, order management, supplier management, and reporting.",
-      category: "Web Application",
     },
     {
       name: "Chapimaster",

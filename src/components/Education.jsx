@@ -11,8 +11,8 @@ const Education = ({ data }) => {
               <div key={index} className="bg-gray-50 rounded-2xl p-6 shadow-sm">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">{edu.institution}</h3>
-                    <p className="text-lg text-primary-600 font-semibold">{edu.degree}</p>
+                    <h3 className="text-xl font-bold text-gray-900">{edu.degree}</h3>
+                    <p className="text-lg text-primary-600 font-semibold">{edu.institution}</p>
                   </div>
                   <span className="bg-primary-100 text-primary-800 px-4 py-2 rounded-full font-medium mt-4 md:mt-0">
                     {edu.period}
