@@ -8,9 +8,11 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Education from "./components/Education";
 import Footer from "./components/Footer";
+import { ArrowUp } from "lucide-react";
 
 function App() {
   const [portfolioData, setPortfolioData] = useState(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -24,6 +26,20 @@ function App() {
         );
       });
   }, []);
+
+  // ✅ Scroll-to-top visibility logic
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) setShowScrollTop(true);
+      else setShowScrollTop(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   if (!portfolioData) return <p className="text-center mt-10">Loading...</p>;
 
@@ -48,7 +64,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 relative">
       <Header data={portfolioData.personalInfo} setData={setPortfolioData} />
       <Hero data={portfolioData.personalInfo} setData={setPortfolioData} />
       <About data={portfolioData.personalInfo} setData={setPortfolioData} />
@@ -57,6 +73,16 @@ function App() {
       <Projects data={portfolioData.projects} setData={setPortfolioData} />
       <Education data={portfolioData.education} setData={setPortfolioData} />
       <Footer data={portfolioData.personalInfo} setData={setPortfolioData} />
+
+      {/* ✅ Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition duration-300"
+        >
+          <ArrowUp size={20} />
+        </button>
+      )}
     </div>
   );
 }

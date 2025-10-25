@@ -14,12 +14,15 @@ export const portfolioData = {
       "HTML",
       "CSS",
       "JavaScript",
+      "Node",
+      "PHP [Core, Laravel]",
       "Vue",
       "React",
-      "jQuery",
-      "AJAX",
+      "Livewire",
+      "AlpineJS",
       "Bootstrap",
-      "PHP [Core, Laravel]",
+      "TailwindCSS",
+      "Sass",
     ],
     databases: [
       "MySQL",
@@ -38,7 +41,7 @@ export const portfolioData = {
       "Clickup",
       "Slack",
     ],
-    thirdParties: ["Twilio", "Stripe", "Paypal", "ChatGPT", "Pusher"],
+    thirdParties: ["Twilio", "Stripe", "Paypal", "ChatGPT", "Pusher", "Socket.io"],
   },
 
   experience: {
