@@ -2,7 +2,7 @@ export const portfolioData = {
   personalInfo: {
     name: "Shahroz Javed",
     title: "PHP-Laravel Developer",
-    address: "Dipty Naseem Town More Eminabad, Gujranwala, Pakistan",
+    address: "Gujranwala, Pakistan",
     phone: "+92 3056700508",
     email: "shahrozmaher198r@gmail.com",
     summary:
