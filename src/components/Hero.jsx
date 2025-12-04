@@ -2,6 +2,26 @@ import React from "react";
 import { MapPin, Phone, Mail, Download } from "lucide-react"; // Added Download icon
 
 const Hero = ({ data }) => {
+  function printDiv(divId) {
+    // Get the HTML of the div
+    const divContent = document.getElementById(divId)?.innerHTML;
+
+    // Save the current body content
+    const originalContent = document.body.innerHTML;
+
+    // Replace body content with div content
+    document.body.innerHTML = divContent;
+
+    // Open print dialog
+    window.print();
+
+    // Restore original content after printing
+    document.body.innerHTML = originalContent;
+
+    // Optional: reload scripts/styles if needed
+    window.location.reload();
+  }
+
   return (
     <section className="gradient-bg text-white py-20">
       <div className="container mx-auto px-6">
@@ -75,6 +95,7 @@ const Hero = ({ data }) => {
 
           {/* Download CV Button */}
           <button
+            onClick={() => printDiv("print-area")}
             className="
               group
               bg-white text-primary-600 px-8 py-4 

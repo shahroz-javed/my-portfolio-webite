@@ -1,3 +1,5 @@
+import projects from "./projects";
+
 export const portfolioData = {
   personalInfo: {
     name: "Shahroz Javed",
@@ -43,62 +45,7 @@ export const portfolioData = {
     ],
   },
 
-  projects: [
-    {
-      name: "Bilz App",
-      description:
-        "Restaurant Inventory Management System: Multi-tenant solution with purchase, returns, kitchen tracking, and POS.",
-      category: "Web Application",
-    },
-    {
-      name: "SPORT SOCIAL",
-      description:
-        "Sports Podcast & Live Events App: Podcast streaming, event listings, and audio player.",
-      category: "Mobile App",
-    },
-    {
-      name: "WBSC",
-      description:
-        "World Baseball Softball Confederation Website: Content management, multilingual support, rankings, player profiles, live events.",
-      category: "Website",
-    },
-    {
-      name: "GCL",
-      description:
-        "Galapagos Cruise Link: Cruise booking platform with vendor management, schedules, pricing, and availability.",
-      category: "Web Application",
-    },
-    {
-      name: "CASPER",
-      description:
-        "Equipment eStore & Technician Booking: E-commerce with tool sales and technician booking system.",
-      category: "E-commerce",
-    },
-    {
-      name: "INSPOBIN",
-      description:
-        "Cloud Storage & Subscription Platform: File storage, subscription management, Stripe integration.",
-      category: "Web Application",
-    },
-    {
-      name: "OpinionUniverse",
-      description:
-        "Survey & Rewards Platform: Survey integrations with reward tracking and compensation logic.",
-      category: "Web Platform",
-    },
-    {
-      name: "HRIS Platform",
-      description:
-        "Human Resource Information System: Employee management, attendance, assets, reporting, self-service panel.",
-      category: "Enterprise Software",
-    },
-    {
-      name: "Chapimaster",
-      description:
-        "Personal Blog & CV Builder: Blog platform with custom CV builder tool.",
-      category: "Web Application",
-    },
-  ],
+  projects: [...projects.filter((p) => p?.portfolios?.includes("frontend"))],
 
   education: [
     {

@@ -1,3 +1,5 @@
+import projects from "./projects";
+
 export const portfolioData = {
   personalInfo: {
     name: "Shahroz Javed",
@@ -5,8 +7,9 @@ export const portfolioData = {
     address: "Gujranwala, Pakistan",
     phone: "+92 3056700508",
     email: "shahrozmaher198r@gmail.com",
+    linkedin: "https://www.linkedin.com/in/shahroz-javed-075008205/",
     summary:
-      "To secure a challenging role as a PHP Developer in a dynamic organization where my technical expertise in Core PHP and Laravel framework can be utilized to design and develop high-performance web applications. I am eager to work in a collaborative environment, learn new technologies, and contribute to the growth of the company.",
+      "Experienced and results-driven Full Stack Developer with 4+ years of professional experience in PHP (Laravel) and growing expertise in Node.js. Skilled in designing and developing scalable web applications, RESTful APIs, and modern frontend integrations with Vue.js and React. Passionate about clean code, performance optimization, and building reliable systems for global users. Eager to contribute to innovative remote teams delivering high-impact digital products.",
   },
 
   skills: {
@@ -41,7 +44,14 @@ export const portfolioData = {
       "Clickup",
       "Slack",
     ],
-    thirdParties: ["Twilio", "Stripe", "Paypal", "ChatGPT", "Pusher", "Socket.io"],
+    thirdParties: [
+      "Twilio",
+      "Stripe",
+      "Paypal",
+      "ChatGPT",
+      "Pusher",
+      "Socket.io",
+    ],
   },
 
   experience: {
@@ -58,74 +68,7 @@ export const portfolioData = {
     ],
   },
 
-  projects: [
-    {
-      name: "Bilz App",
-      description:
-        "Restaurant Inventory Management System: Multi-tenant solution with purchase, returns, kitchen tracking, and POS.",
-      category: "Web Application",
-    },
-    {
-      name: "SPORT SOCIAL",
-      description:
-        "Sports Podcast & Live Events App: Podcast streaming, event listings, and audio player.",
-      category: "Mobile App",
-    },
-    {
-      name: "WBSC",
-      description:
-        "World Baseball Softball Confederation Website: Content management, multilingual support, rankings, player profiles, live events.",
-      category: "Website",
-    },
-    {
-      name: "GCL",
-      description:
-        "Galapagos Cruise Link: Cruise booking platform with vendor management, schedules, pricing, and availability.",
-      category: "Web Application",
-    },
-    {
-      name: "CASPER",
-      description:
-        "Equipment eStore & Technician Booking: E-commerce with tool sales and technician booking system.",
-      category: "E-commerce",
-    },
-    {
-      name: "INSPOBIN",
-      description:
-        "Cloud Storage & Subscription Platform: File storage, subscription management, Stripe integration.",
-      category: "Web Application",
-    },
-    {
-      name: "OpinionUniverse",
-      description:
-        "Survey & Rewards Platform: Survey integrations with reward tracking and compensation logic.",
-      category: "Web Platform",
-    },
-    {
-      name: "HRIS Platform",
-      description:
-        "Human Resource Information System: Employee management, attendance, assets, reporting, self-service panel.",
-      category: "Enterprise Software",
-    },
-    {
-      name: "Ater",
-      description:
-        "A Event Management Platform: Event listings, ticketing, user profiles, and admin dashboard.",
-      category: "Web Application",
-    },
-    {
-      name: "Iotti-Management",
-      description:
-        "A Inventory Management System: Stock tracking, order management, supplier management, and reporting.",
-      category: "Web Application",
-    },
-    {
-      name: "Chapimaster",
-      description:
-        "Personal Blog & CV Builder: Blog platform with custom CV builder tool.",
-      category: "Web Application",
-    },
-  ],
+  projects: [...projects],
 
   education: [
     {
