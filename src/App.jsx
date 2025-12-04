@@ -1,16 +1,21 @@
 // App.jsx
 import "./App.css";
+import "./styles/animations.css";
+
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Experience from "./components/Experience";
-import Projects from "./components/Projects";
-import Education from "./components/Education";
-import Footer from "./components/Footer";
+import Header from "./components/Header-Redesigned";
+import Hero from "./components/Hero-Redesigned";
+import About from "./components/About-Redesigned";
+import Skills from "./components/Skills-Redesigned";
+import Experience from "./components/Experience-Redesigned";
+import Projects from "./components/Projects-Redesigned";
+import Education from "./components/Education-Redesigned";
+import Footer from "./components/Footer-Redesigned";
+
 import { ArrowUp } from "lucide-react";
-import SimpleTemplate from "./components/resume_templates/SimpleTemplate";
+// import SimpleTemplate from "./components/resume_templates/SimpleTemplate";
+// import ATSMaxTemplate from "./components/resume_templates/ATSMaxTemplate";
+import ExecutiveTemplate from "./components/resume_templates/ExecutiveTemplate";
 
 function App() {
   const [portfolioData, setPortfolioData] = useState(null);
@@ -158,12 +163,12 @@ function App() {
   // MAIN PAGE RENDER
   // ======================================
   return (
-    <div className="min-h-screen bg-gray-50 relative">
+    <div className="min-h-screen bg-white relative">
       
 
       {/* HIDDEN PRINT-ONLY TEMPLATE */}
       <div id="print-area" style={{ display: "none" }}>
-        <SimpleTemplate data={portfolioData} />
+        <ExecutiveTemplate data={portfolioData} />
       </div>
 
       {/* USER VISIBLE SECTIONS */}
