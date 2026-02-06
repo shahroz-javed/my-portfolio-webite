@@ -8,6 +8,7 @@ export const portfolioData = {
     phone: "+92 3056700508",
     email: "shahrozmaher198r@gmail.com",
     linkedin: "https://www.linkedin.com/in/shahroz-javed-075008205/",
+    portfolio: "https://shahroz-javed-dev.netlify.app/?resume=9d8f7g6h5j4k",
     summary:
       "Experienced and results-driven Full Stack Developer with 4+ years of professional experience in PHP (Laravel) and growing expertise in Node.js. Skilled in designing and developing scalable web applications, RESTful APIs, and modern frontend integrations with Vue.js and React. Passionate about clean code, performance optimization, and building reliable systems for global users. Eager to contribute to innovative remote teams delivering high-impact digital products.",
   },

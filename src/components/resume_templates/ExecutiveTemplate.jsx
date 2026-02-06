@@ -37,6 +37,16 @@ const ExecutiveTemplate = ({ data }) => {
               </a>
             </p>
           )}
+          {personalInfo.portfolio && (
+            <p>
+              <a
+                href={personalInfo.portfolio}
+                className="text-blue-600 hover:underline"
+              >
+                Portfolio
+              </a>
+            </p>
+          )}
         </div>
 
         <div className="h-1 bg-gray-800 mt-6 w-20"></div>

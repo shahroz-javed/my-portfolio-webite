@@ -25,6 +25,7 @@ const ATSMaxTemplate = ({ data }) => {
           <p>{personalInfo.phone}</p>
           <p>{personalInfo.address}</p>
           {personalInfo.linkedin && <p>{personalInfo.linkedin}</p>}
+          {personalInfo.portfolio && <p>{personalInfo.portfolio}</p>}
         </div>
       </div>
 

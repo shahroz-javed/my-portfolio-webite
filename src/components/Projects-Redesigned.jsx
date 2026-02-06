@@ -5,25 +5,32 @@ import { useScrollReveal } from "~/hooks/useAnimations";
 const Projects = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [modalProject, setModalProject] = useState(null);
   const { ref: headerRef, isRevealed: headerRevealed } = useScrollReveal();
 
   const projectsPerPage = 6;
 
-  // Extract unique categories
-  const categories = ["All", ...new Set(data.map((p) => p.category))];
+  // Only consider projects with status === 1 for display
+  const visibleProjects = data.filter((p) => p.status === 1);
 
-  // Filter projects by category
+  // Extract unique categories from visible projects
+  const categories = [
+    "All",
+    ...new Set(visibleProjects.map((p) => p.category)),
+  ];
+
+  // Filter projects by category (applies only to visible projects)
   const filteredProjects =
     selectedCategory === "All"
-      ? data
-      : data.filter((p) => p.category === selectedCategory);
+      ? visibleProjects
+      : visibleProjects.filter((p) => p.category === selectedCategory);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const startIndex = (currentPage - 1) * projectsPerPage;
   const currentProjects = filteredProjects.slice(
     startIndex,
-    startIndex + projectsPerPage
+    startIndex + projectsPerPage,
   );
 
   const goToPage = (pageNumber) => {
@@ -104,7 +111,7 @@ const Projects = ({ data }) => {
               {/* Image/Placeholder */}
               <div
                 className={`h-40 bg-gradient-to-br ${getCategoryColor(
-                  project.category
+                  project.category,
                 )} relative overflow-hidden`}
               >
                 {/* Gradient animation on hover */}
@@ -134,7 +141,7 @@ const Projects = ({ data }) => {
                 <div className="mb-3">
                   <span
                     className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getCategoryColor(
-                      project.category
+                      project.category,
                     )} shadow-md`}
                   >
                     {project.category}
@@ -153,19 +160,231 @@ const Projects = ({ data }) => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 pt-4 border-t border-white/20">
-                  <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg font-medium transition-all duration-300 hover:scale-105">
+                  <button
+                    onClick={() => setModalProject(project)}
+                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                  >
                     <ExternalLink size={16} />
-                    <span className="hidden sm:inline">View</span>
+                    <span className="hidden sm:inline">Details</span>
                   </button>
-                  <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all duration-300 hover:scale-105">
-                    <Github size={16} />
-                    <span className="hidden sm:inline">Code</span>
-                  </button>
+
+                  {project.link ? (
+                    <button
+                      onClick={() =>
+                        window.open(
+                          project.link,
+                          "_blank",
+                          "noopener,noreferrer",
+                        )
+                      }
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-green-50 hover:bg-green-100 text-green-600 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                      title="View live project"
+                    >
+                      <ExternalLink size={16} />
+                      <span className="hidden sm:inline">Live</span>
+                    </button>
+                  ) : null}
+
+                  {project.repo || project.code_link ? (
+                    <button
+                      onClick={() =>
+                        window.open(
+                          project.repo || project.code_link,
+                          "_blank",
+                          "noopener,noreferrer",
+                        )
+                      }
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                    >
+                      <Github size={16} />
+                      <span className="hidden sm:inline">Code</span>
+                    </button>
+                  ) : null}
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Project Detail Modal */}
+        {modalProject && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+            onClick={() => setModalProject(null)}
+          >
+            <div
+              className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto flex flex-col shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-start">
+                <div>
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    {modalProject.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mt-1">
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 mr-2">
+                      {modalProject.category}
+                    </span>
+                    {modalProject.project_type}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setModalProject(null)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors text-2xl"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                {/* Description */}
+                <div>
+                  <p className="text-gray-700 leading-relaxed">
+                    {modalProject.description}
+                  </p>
+                </div>
+
+                {/* Tech Stack */}
+                {modalProject.tech_stack &&
+                  modalProject.tech_stack.length > 0 && (
+                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                      <p className="font-semibold text-gray-900 mb-3">
+                        🛠️ Tech Stack
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {modalProject.tech_stack.map((tech, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 bg-white text-blue-600 border border-blue-300 rounded-lg text-sm font-medium"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                {/* Skills Used */}
+                {modalProject.skills_used &&
+                  modalProject.skills_used.length > 0 && (
+                    <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                      <p className="font-semibold text-gray-900 mb-3">
+                        💡 Skills Used
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {modalProject.skills_used.map((skill, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 bg-white text-purple-600 border border-purple-300 rounded-lg text-sm font-medium"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                {/* Responsibilities */}
+                {modalProject.responsibilities &&
+                  modalProject.responsibilities.length > 0 && (
+                    <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                      <p className="font-semibold text-gray-900 mb-3">
+                        ✓ Responsibilities
+                      </p>
+                      <ul className="space-y-2">
+                        {modalProject.responsibilities.map((r, i) => (
+                          <li
+                            key={i}
+                            className="flex gap-2 text-sm text-gray-700"
+                          >
+                            <span className="text-green-600 font-bold">•</span>
+                            {r}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                {/* Achievements */}
+                {modalProject.achievements &&
+                  modalProject.achievements.length > 0 && (
+                    <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                      <p className="font-semibold text-gray-900 mb-3">
+                        🏆 Achievements
+                      </p>
+                      <ul className="space-y-2">
+                        {modalProject.achievements.map((a, i) => (
+                          <li
+                            key={i}
+                            className="flex gap-2 text-sm text-gray-700"
+                          >
+                            <span className="text-orange-600 font-bold">•</span>
+                            {a}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                {/* Demo Video */}
+                {modalProject.demo && (
+                  <div>
+                    <p className="font-semibold text-gray-900 mb-3">📹 Demo</p>
+                    <video
+                      src={modalProject.demo}
+                      controls
+                      className="w-full rounded-lg shadow-md"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Modal Footer */}
+              <div className="sticky bottom-0 bg-white border-t border-gray-200 p-6 flex gap-3">
+                {modalProject.link && (
+                  <button
+                    onClick={() =>
+                      window.open(
+                        modalProject.link,
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-green-100 hover:bg-green-200 text-green-700 rounded-lg font-semibold transition-all duration-300"
+                  >
+                    <ExternalLink size={18} />
+                    View Live Project
+                  </button>
+                )}
+                {modalProject.repo || modalProject.code_link ? (
+                  <button
+                    onClick={() =>
+                      window.open(
+                        modalProject.repo || modalProject.code_link,
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-semibold transition-all duration-300"
+                  >
+                    <Github size={18} />
+                    View Code
+                  </button>
+                ) : null}
+                <button
+                  onClick={() => setModalProject(null)}
+                  className="flex-1 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-semibold transition-all duration-300"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Pagination */}
         {totalPages > 1 && (

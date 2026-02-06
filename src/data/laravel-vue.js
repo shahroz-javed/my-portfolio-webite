@@ -7,6 +7,8 @@ export const portfolioData = {
     address: "Gujranwala, Pakistan",
     phone: "+92 3056700508",
     email: "shahrozmaher198r@gmail.com",
+    linkedin: "https://www.linkedin.com/in/shahroz-javed-075008205/",
+    portfolio: "https://shahroz-javed-dev.netlify.app/?resume=2jsak23123",
     summary:
       "Full Stack Laravel + Vue.js Developer passionate about building secure, maintainable, and high-performance web applications. Experienced in RESTful APIs, component-based frontend architecture, and scalable backend logic following MVC principles.",
   },

@@ -63,7 +63,22 @@ function App() {
 
     // LOAD DATA FILE
     import(`./data/${fileMap[resumeCode]}.js`)
-      .then((mod) => setPortfolioData(mod.portfolioData))
+      .then((mod) => {
+        // Add current portfolio URL as portfolio link
+        const dataWithPortfolio = {
+          ...mod.portfolioData,
+          personalInfo: {
+            ...mod.portfolioData.personalInfo,
+            portfolio:
+              window.location.origin +
+                window.location.pathname.split("/")[1] ===
+              "portfolio"
+                ? window.location.origin
+                : window.location.origin,
+          },
+        };
+        setPortfolioData(dataWithPortfolio);
+      })
       .catch(() => setNotFound(true));
   }, []);
 
@@ -79,7 +94,6 @@ function App() {
   }, []);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
 
   // ======================================
   // SHOW SECRET MAPPING PAGE
@@ -164,8 +178,6 @@ function App() {
   // ======================================
   return (
     <div className="min-h-screen bg-white relative">
-      
-
       {/* HIDDEN PRINT-ONLY TEMPLATE */}
       <div id="print-area" style={{ display: "none" }}>
         <ExecutiveTemplate data={portfolioData} />
@@ -173,7 +185,7 @@ function App() {
 
       {/* USER VISIBLE SECTIONS */}
       <Header data={portfolioData.personalInfo} />
-      <Hero data={portfolioData.personalInfo}/>
+      <Hero data={portfolioData.personalInfo} />
       <About data={portfolioData.personalInfo} />
       <Skills data={portfolioData.skills} />
       <Experience data={portfolioData.experience} />
